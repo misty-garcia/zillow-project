@@ -1,9 +1,13 @@
+import numpy as np
+import pandas as pd
+import seaborn as sns
+
 from math import sqrt
 from sklearn.metrics import mean_squared_error, r2_score, explained_variance_score
 from sklearn.linear_model import LinearRegression
 
-def compute_baseline(y_train):
-    return np.array([y_train.mean()]*len(y_train))
+def compute_baseline(y):
+    return np.array([y.mean()]*len(y))
 
 def linear_model(X_train, y_train, df):
     lm=LinearRegression()
@@ -19,14 +23,10 @@ def evaluate(actual, model):
     r2 = r2_score(actual, model)
     return MSE, SSE, RMSE, r2 
     
-# MSE_1 = mean_squared_error(predictions.actual, predictions.lm1)
-# SSE_1 = MSE_1*len(predictions.actual)
-# RMSE_1 = sqrt(MSE_1)
-# r2_1 = r2_score(predictions.actual, predictions.lm1)
-# print(MSE_1,SSE_1,RMSE_1,r2_1)
-
-# MSE_2 = mean_squared_error(predictions.actual, predictions.lm2)
-# SSE_2 = MSE_2*len(predictions.actual)
-# RMSE_2 = sqrt(MSE_2)
-# r2_2 = r2_score(predictions.actual, predictions.lm2)
-# print(MSE_2,SSE_2,RMSE_2,r2_2)
+def plot_linear_model(actuals, lm, baseline):
+    plot = pd.DataFrame({'actual': actuals,
+                'lm': lm,
+                'baseline': baseline.flatten()})\
+    .melt(id_vars=['actual'], var_name='model', value_name='prediction')\
+    .pipe((sns.relplot, 'data'), x='actual', y='prediction', hue='model')
+    return plot
