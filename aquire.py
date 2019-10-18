@@ -4,7 +4,7 @@ import util
 
 def get_data(db):
     query = """
-    SELECT bathroomcnt, bedroomcnt,calculatedfinishedsquarefeet, taxvaluedollarcnt, fips
+    SELECT bathroomcnt, bedroomcnt,calculatedfinishedsquarefeet, taxvaluedollarcnt
     FROM properties_2017
     JOIN predictions_2017 USING (parcelid)
     WHERE transactiondate BETWEEN "2017-05-01" AND "2017-06-31"
