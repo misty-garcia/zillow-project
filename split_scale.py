@@ -4,9 +4,9 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, QuantileTransformer, PowerTransformer, RobustScaler, MinMaxScaler
 
-# split_my_data(X, y, train_pct)
-def split_my_data(df, train_pct):
-    train, test = train_test_split(df, train_size=train_pct, random_state=123)
+# split_my_data(X, y, train_pct, random_state=123)
+def split_my_data(df, train_pct, random_state=123):
+    train, test = train_test_split(df, train_size=train_pct, random_state=random_state)
     return train, test
 
 def transform_scaler(train, test, scaler):  
