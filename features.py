@@ -57,7 +57,7 @@ def num_optimal_features(X_train, y_train):
     number_of_features_list = range(1,len(X_train.columns)+1)
     high_score=0
     number_of_features=0           
-    score_list =[]
+    # score_list =[]
 
     for n in number_of_features_list:
         model = LinearRegression()
@@ -65,7 +65,7 @@ def num_optimal_features(X_train, y_train):
         train_rfe = rfe.fit_transform(X_train,y_train)
         model.fit(train_rfe,y_train)
         score = model.score(train_rfe,y_train)
-        score_list.append(score)
+        # score_list.append(score)
         if(score>high_score):
             high_score = score
             number_of_features = n
@@ -85,10 +85,9 @@ def optimal_features(n, X_train, y_train):
 
     return selected_features_rfe
 
-def features_to_X_train_and_test(features):
-    new_X_train = X_train_scaled[features]
-    new_X_test = X_test_scaled[features]
-    return new_X_train, new_X_test
+def features_to_X_train_and_test(df, features):
+    optimal_features_df = df[features]
+    return optimal_features_df
 
 def recursive_feature_elimination(X_train, y_train):
     return optimal_features(num_optimal_features(X_train, y_train), X_train, y_train)
