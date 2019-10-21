@@ -26,20 +26,20 @@ def evaluate(actual, model):
     RMSE = sqrt(MSE)
     r2 = r2_score(actual, model)
     return MSE, SSE, RMSE, r2 
-    
+
 def plot_linear_model(actuals, lm, baseline):
     plot = pd.DataFrame({'actual': actuals,
                 'linear model': lm,
                 'baseline': baseline.flatten()})\
     .melt(id_vars=['actual'], var_name='model', value_name='prediction')\
-    .pipe((sns.relplot, 'data'), x='actual', y='prediction', hue='model')
+    .pipe((sns.relplot, 'data'), x='actual', y='prediction', hue='model', alpha=.3)
 
     plt.plot([actuals.min(),actuals.max()],[lm.min(),lm.max()], \
             c='black', ls=':', linewidth = 3)
+ 
     plt.ticklabel_format(style="plain")
-    plt.ylabel("Predicted")
-    plt.xlabel("Actuals")
-    plt.xticks(rotation=-45)
+    plt.ylabel("Predicted (in millions)")
+    plt.xlabel("Actuals (in millions)")
     return plot
 
 def plot_residuals(X_train, y_train):
