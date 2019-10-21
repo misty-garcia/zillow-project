@@ -85,7 +85,7 @@ def optimal_features(n, X_train, y_train):
 
     return selected_features_rfe
 
-def features_to_X_train_and_test(df, features):
+def df_with_optimal_features(df, features):
     optimal_features_df = df[features]
     return optimal_features_df
 
