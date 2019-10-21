@@ -36,10 +36,9 @@ def plot_linear_model(actuals, lm, baseline):
 
     plt.plot([actuals.min(),actuals.max()],[lm.min(),lm.max()], \
             c='black', ls=':', linewidth = 3)
-    plt.title('Regression Model Performs Better')
     plt.ticklabel_format(style="plain")
-    plt.ylabel("Predicted (in millions)")
-    plt.xlabel("Actuals (in millions)")
+    plt.ylabel("Predicted")
+    plt.xlabel("Actuals")
     plt.xticks(rotation=-45)
     return plot
 
